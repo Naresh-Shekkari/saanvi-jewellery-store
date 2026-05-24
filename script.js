@@ -185,9 +185,10 @@ function reveal(){
 
 /* Load Products From Admin */
 
-loadProducts();
+//loadProducts();
+localStorage.getItem("products")
 
-function loadProducts(){
+/*function loadProducts(){
 
     let products =
     JSON.parse(localStorage.getItem("products"))
@@ -227,6 +228,79 @@ function loadProducts(){
             '${product.name}',
             '₹ ${product.price}'
             )">
+
+                View Details
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}*/
+
+/* Firebase */
+
+import { db }
+
+from "./firebase.js";
+
+import {
+
+    collection,
+    getDocs
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* Load Products */
+
+loadProducts();
+
+async function loadProducts(){
+
+    let container =
+    document.getElementById("productContainer");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    let querySnapshot =
+    await getDocs(
+        collection(db,"products")
+    );
+
+    querySnapshot.forEach(doc => {
+
+        let product = doc.data();
+
+        container.innerHTML += `
+
+        <div class="product-card reveal">
+
+            <img src="${product.image}">
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <p class="price">
+
+                ₹ ${product.price}
+
+            </p>
+
+            <button onclick="addToCart(${product.price})">
+
+                Add To Cart
+
+            </button>
+
+            <button class="details-btn">
 
                 View Details
 

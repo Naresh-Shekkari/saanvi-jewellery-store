@@ -1,5 +1,4 @@
-
-/* Check Admin Login */
+/* Security */
 
 if(
     localStorage.getItem("adminLoggedIn")
@@ -11,20 +10,35 @@ if(
 
 }
 
-/* Load Saved Products */
+/* Firebase */
 
-let products =
-JSON.parse(localStorage.getItem("products"))
-|| [];
+import { db }
 
-/* Display Saved Products */
+from "./firebase.js";
 
-displayProducts();
+import {
+
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* Products */
+
+let products = [];
+
+loadProducts();
 
 /* Add Product */
 
-function addProduct(){
-let name =
+async function addProduct(){
+
+    let name =
     document.getElementById("productName").value;
 
     let price =
@@ -46,11 +60,9 @@ let name =
 
     let reader = new FileReader();
 
-    reader.onload = function(e){
+    reader.onload = async function(e){
 
         let product = {
-
-            id: Date.now(),
 
             name:name,
 
@@ -60,27 +72,50 @@ let name =
 
         };
 
-        products.push(product);
+        await addDoc(
 
-        saveProducts();
+            collection(db,"products"),
 
-        displayProducts();
+            product
+
+        );
+
+        alert("Product Added Successfully");
 
         clearForm();
+
+        loadProducts();
 
     };
 
     reader.readAsDataURL(file);
+
 }
 
-/* Save Products */
+/* Load Products */
 
-function saveProducts(){
+async function loadProducts(){
 
-    localStorage.setItem(
-        "products",
-        JSON.stringify(products)
+    let querySnapshot =
+    await getDocs(
+        collection(db,"products")
     );
+
+    products = [];
+
+    querySnapshot.forEach(docItem => {
+
+        products.push({
+
+            id:docItem.id,
+
+            ...docItem.data()
+
+        });
+
+    });
+
+    displayProducts();
 
 }
 
@@ -93,7 +128,7 @@ function displayProducts(){
 
     container.innerHTML = "";
 
-    products.forEach((product,index) => {
+    products.forEach(product => {
 
         container.innerHTML += `
 
@@ -105,20 +140,9 @@ function displayProducts(){
 
             <p>₹ ${product.price}</p>
 
-            <small>
-                Product ID:
-                ${product.id}
-            </small>
-
             <div class="admin-btns">
 
-                <button onclick="editProduct(${index})">
-
-                    Edit
-
-                </button>
-
-                <button onclick="deleteProduct(${index})">
+                <button onclick="deleteProduct('${product.id}')">
 
                     Delete
 
@@ -136,46 +160,18 @@ function displayProducts(){
 
 /* Delete Product */
 
-function deleteProduct(index){
+async function deleteProduct(id){
 
     let confirmDelete =
-    confirm("Delete this product?");
+    confirm("Delete Product?");
 
     if(confirmDelete){
 
-        products.splice(index,1);
+        await deleteDoc(
+            doc(db,"products",id)
+        );
 
-        saveProducts();
-
-        displayProducts();
-
-    }
-
-}
-
-/* Edit Product */
-
-function editProduct(index){
-
-    let product = products[index];
-
-    let newName =
-    prompt("Enter New Product Name",
-    product.name);
-
-    let newPrice =
-    prompt("Enter New Price",
-    product.price);
-
-    if(newName && newPrice){
-
-        product.name = newName;
-
-        product.price = newPrice;
-
-        saveProducts();
-
-        displayProducts();
+        loadProducts();
 
     }
 
@@ -208,3 +204,11 @@ function logout(){
     "login.html";
 
 }
+
+/* Window Access */
+
+window.addProduct = addProduct;
+
+window.deleteProduct = deleteProduct;
+
+window.logout = logout;
