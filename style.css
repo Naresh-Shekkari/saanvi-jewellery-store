@@ -1,0 +1,440 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#fffaf5;
+    color:#333;
+    transition:0.4s;
+}
+
+/* Dark Theme */
+
+.dark-theme{
+    background:#111;
+    color:white;
+}
+
+/* Loader */
+
+.loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.loader-ring{
+    width:80px;
+    height:80px;
+    border:8px solid #eee;
+    border-top:8px solid gold;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    100%{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* Navbar */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 40px;
+    background:#111;
+}
+
+.logo{
+    color:gold;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+}
+
+.nav-links a:hover{
+    color:gold;
+}
+
+.menu-btn{
+    display:none;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.search-box{
+    background:white;
+    padding:10px 15px;
+    border-radius:30px;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+}
+
+.theme-btn{
+    border:none;
+    padding:12px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.cart-icon{
+    color:white;
+    position:relative;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.cart-icon span{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    background:red;
+    color:white;
+    padding:4px 8px;
+    border-radius:50%;
+    font-size:12px;
+}
+
+/* Hero */
+
+.hero{
+    height:90vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+    ),
+
+    url('https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=1600&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero-content{
+    color:white;
+    animation:fadeIn 2s ease;
+}
+
+.hero-content h1{
+    font-size:65px;
+}
+
+.hero-content p{
+    font-size:24px;
+    margin:20px 0;
+}
+
+.hero-content button{
+    padding:15px 40px;
+    border:none;
+    background:gold;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+.hero-content button:hover{
+    box-shadow:0 0 20px gold;
+}
+
+/* Sections */
+
+.section-title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:50px;
+}
+
+/* Products */
+
+.products{
+    padding:80px 40px;
+}
+
+.product-container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.product-card{
+    width:320px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.4s;
+}
+
+.product-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 20px gold;
+}
+
+.product-card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+.product-card img:hover{
+    transform:scale(1.1);
+}
+
+.product-card h3{
+    margin-top:20px;
+}
+
+.product-card .price{
+    margin:15px 0;
+    color:#c59d00;
+    font-size:22px;
+}
+
+.product-card button{
+    margin:10px;
+    padding:12px 25px;
+    border:none;
+    background:#111;
+    color:white;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.product-card button:hover{
+    background:gold;
+    color:black;
+}
+
+.details-btn{
+    background:gold !important;
+    color:black !important;
+}
+
+/* About */
+
+.about{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    font-size:22px;
+    line-height:1.8;
+}
+
+/* Contact */
+
+.contact{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.contact h2{
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.contact p{
+    font-size:22px;
+    margin:15px 0;
+}
+
+/* Footer */
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+/* WhatsApp */
+
+.whatsapp-btn{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+
+    width:65px;
+    height:65px;
+
+    background:#25d366;
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+    font-size:35px;
+    text-decoration:none;
+}
+
+/* Popups */
+
+.cart-popup,
+.details-popup,
+.checkout-popup,
+.success-popup{
+
+    display:none;
+
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+
+    top:0;
+    left:0;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:2000;
+}
+
+.cart-content,
+.details-content,
+.checkout-content,
+.success-content{
+
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    width:350px;
+    text-align:center;
+    position:relative;
+}
+
+.close-cart,
+.close-details,
+.close-checkout{
+
+    position:absolute;
+    right:20px;
+    top:10px;
+
+    font-size:30px;
+    cursor:pointer;
+}
+
+.checkout-content input{
+    width:100%;
+    padding:12px;
+    margin:15px 0;
+}
+
+.checkout-content button,
+.checkout-btn{
+
+    width:100%;
+    padding:12px;
+    border:none;
+    background:gold;
+    cursor:pointer;
+    border-radius:10px;
+}
+
+.success-content i{
+    color:green;
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+/* Reveal Animation */
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:80px;
+        left:-100%;
+        width:100%;
+        background:#111;
+        flex-direction:column;
+        text-align:center;
+        padding:20px 0;
+        transition:0.4s;
+    }
+
+    .nav-links.active{
+        left:0;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .hero-content h1{
+        font-size:40px;
+    }
+
+    .hero-content p{
+        font-size:18px;
+    }
+
+}
