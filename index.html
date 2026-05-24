@@ -26,14 +26,6 @@
 
 <body>
 
-    <!-- Loader -->
-
-    <div class="loader">
-
-        <div class="loader-ring"></div>
-
-    </div>
-
     <!-- Navbar -->
 
     <header>
@@ -44,7 +36,7 @@
                 Saanvi Jewellery
             </div>
 
-            <!-- Mobile Menu -->
+            <!-- Hamburger -->
 
             <div class="menu-btn"
             onclick="toggleMenu()">
@@ -78,7 +70,7 @@
 
             </div>
 
-            <!-- Theme -->
+            <!-- Theme Toggle -->
 
             <button class="theme-btn"
             onclick="toggleTheme()">
@@ -108,15 +100,15 @@
 
     <section class="hero">
 
-        <div class="hero-content reveal">
+        <div class="hero-content">
 
             <h1>
-                Luxury Handmade Jewellery
+                Elegant Handmade Jewellery
             </h1>
 
             <p>
-                Elegant Premium Jewellery Collections
-                Crafted With Love & Beauty.
+                Premium Jewellery Collections
+                Designed For Every Occasion.
             </p>
 
             <button>
@@ -132,92 +124,12 @@
     <section class="products"
     id="products">
 
-        <h2 class="section-title reveal">
+        <h2 class="section-title">
             Trending Products
         </h2>
 
-        <div class="product-container">
-
-            <!-- Product 1 -->
-
-            <div class="product-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1000&auto=format&fit=crop">
-
-                <h3>
-                    Diamond Earrings
-                </h3>
-
-                <p class="price">
-                    ₹ 2,999
-                </p>
-
-                <button onclick="addToCart(2999)">
-                    Add To Cart
-                </button>
-
-                <button class="details-btn"
-                onclick="openDetails('Diamond Earrings','₹ 2,999')">
-
-                    View Details
-
-                </button>
-
-            </div>
-
-            <!-- Product 2 -->
-
-            <div class="product-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?q=80&w=1000&auto=format&fit=crop">
-
-                <h3>
-                    Bridal Necklace
-                </h3>
-
-                <p class="price">
-                    ₹ 5,499
-                </p>
-
-                <button onclick="addToCart(5499)">
-                    Add To Cart
-                </button>
-
-                <button class="details-btn"
-                onclick="openDetails('Bridal Necklace','₹ 5,499')">
-
-                    View Details
-
-                </button>
-
-            </div>
-
-            <!-- Product 3 -->
-
-            <div class="product-card reveal">
-
-                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=1000&auto=format&fit=crop">
-
-                <h3>
-                    Gold Bangles
-                </h3>
-
-                <p class="price">
-                    ₹ 1,999
-                </p>
-
-                <button onclick="addToCart(1999)">
-                    Add To Cart
-                </button>
-
-                <button class="details-btn"
-                onclick="openDetails('Gold Bangles','₹ 1,999')">
-
-                    View Details
-
-                </button>
-
-            </div>
+        <div class="product-container"
+        id="productContainer">
 
         </div>
 
@@ -228,16 +140,15 @@
     <section class="about"
     id="about">
 
-        <h2 class="section-title reveal">
+        <h2 class="section-title">
             About Us
         </h2>
 
-        <p class="reveal">
+        <p>
 
             Saanvi Handmade Jewellery Store
-            provides luxury handcrafted jewellery
-            collections with premium elegant designs
-            for all occasions.
+            provides premium handcrafted jewellery
+            collections with elegant and luxury designs.
 
         </p>
 
@@ -245,7 +156,7 @@
 
     <!-- Contact -->
 
-    <section class="contact reveal"
+    <section class="contact"
     id="contact">
 
         <h2>
@@ -308,7 +219,7 @@
             </h2>
 
             <p>
-                Total Items:
+                Items Added:
                 <span id="itemCount">
                     0
                 </span>
@@ -321,91 +232,9 @@
                 </span>
             </p>
 
-            <button class="checkout-btn"
-            onclick="openCheckout()">
-
-                Checkout
-
+            <button class="checkout-btn">
+                Proceed To Checkout
             </button>
-
-        </div>
-
-    </div>
-
-    <!-- Product Details -->
-
-    <div class="details-popup"
-    id="detailsPopup">
-
-        <div class="details-content">
-
-            <span class="close-details"
-            onclick="closeDetails()">
-
-                &times;
-
-            </span>
-
-            <h2 id="productTitle"></h2>
-
-            <p id="productPrice"></p>
-
-            <p>
-                Premium quality handcrafted jewellery
-                with elegant finishing.
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- Checkout Popup -->
-
-    <div class="checkout-popup"
-    id="checkoutPopup">
-
-        <div class="checkout-content">
-
-            <span class="close-checkout"
-            onclick="closeCheckout()">
-
-                &times;
-
-            </span>
-
-            <h2>
-                Checkout Form
-            </h2>
-
-            <input type="text"
-            placeholder="Full Name">
-
-            <input type="text"
-            placeholder="Mobile Number">
-
-            <input type="text"
-            placeholder="Address">
-
-            <button onclick="placeOrder()">
-                Place Order
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- Success Popup -->
-
-    <div class="success-popup"
-    id="successPopup">
-
-        <div class="success-content">
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            <h2>
-                Order Placed Successfully
-            </h2>
 
         </div>
 

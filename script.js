@@ -182,3 +182,60 @@ function reveal(){
     }
 
 }
+
+/* Load Products From Admin */
+
+loadProducts();
+
+function loadProducts(){
+
+    let products =
+    JSON.parse(localStorage.getItem("products"))
+    || [];
+
+    let container =
+    document.getElementById("productContainer");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    products.forEach(product => {
+
+        container.innerHTML += `
+
+        <div class="product-card reveal">
+
+            <img src="${product.image}">
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <p class="price">
+                ₹ ${product.price}
+            </p>
+
+            <button onclick="addToCart(${product.price})">
+
+                Add To Cart
+
+            </button>
+
+            <button class="details-btn"
+            onclick="openDetails(
+            '${product.name}',
+            '₹ ${product.price}'
+            )">
+
+                View Details
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Admin Dashboard
+    </title>
+
+    <link rel="stylesheet"
+    href="style.css">
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <div class="admin-header">
+
+    <h1>
+        Jewellery Admin Dashboard
+    </h1>
+
+    <button onclick="logout()">
+
+        Logout
+
+    </button>
+
+</div>
+
+        <!-- Product Form -->
+
+        <div class="product-form">
+
+            <input type="text"
+            id="productName"
+            placeholder="Product Name">
+
+            <input type="text"
+            id="productPrice"
+            placeholder="Product Price">
+
+            <input type="file"
+id="productImage"
+accept="image/*">
+
+            <button onclick="addProduct()">
+
+                Add Product
+
+            </button>
+
+        </div>
+
+        <!-- Product List -->
+
+        <div class="admin-products"
+        id="adminProducts">
+
+        </div>
+
+    </div>
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
