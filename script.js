@@ -310,11 +310,21 @@ async function loadProducts(){
 
     </button>
 
-    <button class="details-btn">
+    <button class="details-btn"
 
-        View Details
+onclick="viewDetails(
 
-    </button>
+'${product.name}',
+
+'${product.price}',
+
+'${product.image}'
+
+)">
+
+    View Details
+
+</button>
 
 </div>
 
@@ -361,3 +371,34 @@ Please share more details.`;
 
 window.orderOnWhatsApp =
 orderOnWhatsApp;
+
+/* View Details */
+
+function viewDetails(
+    name,
+    price,
+    image
+){
+
+    localStorage.setItem(
+        "detailsName",
+        name
+    );
+
+    localStorage.setItem(
+        "detailsPrice",
+        price
+    );
+
+    localStorage.setItem(
+        "detailsImage",
+        image
+    );
+
+    window.location.href =
+    "product.html";
+
+}
+
+window.viewDetails =
+viewDetails;
