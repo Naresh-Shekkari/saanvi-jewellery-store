@@ -294,17 +294,29 @@ async function loadProducts(){
 
             </p>
 
-            <button onclick="addToCart(${product.price})">
+            <div class="product-buttons">
 
-                Add To Cart
+    <button class="whatsapp-icon-btn"
 
-            </button>
+    onclick="orderOnWhatsApp(
 
-            <button class="details-btn">
+    '${product.name}',
 
-                View Details
+    '${product.price}'
 
-            </button>
+    )">
+
+        <i class="fab fa-whatsapp"></i>
+
+    </button>
+
+    <button class="details-btn">
+
+        View Details
+
+    </button>
+
+</div>
 
         </div>
 
@@ -313,3 +325,39 @@ async function loadProducts(){
     });
 
 }
+
+/* WhatsApp Order */
+
+function orderOnWhatsApp(
+    productName,
+    productPrice
+){
+
+    let phoneNumber =
+    "918374791604";
+
+    let message =
+
+`Hello Saanvi Handmade Jewellery Store,
+
+I would like to order this product:
+
+Product Name: ${productName}
+
+Price: ₹ ${productPrice}
+
+Please share more details.`;
+
+    let whatsappURL =
+
+`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+window.orderOnWhatsApp =
+orderOnWhatsApp;
