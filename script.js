@@ -2,8 +2,12 @@
 
 window.addEventListener("load", function(){
 
-    document.querySelector(".loader")
-    .style.display = "none";
+    let loader = document.querySelector(".loader");
+
+    if(loader){
+
+        loader.style.display = "none";
+    }
 
 });
 
@@ -12,11 +16,17 @@ window.addEventListener("load", function(){
 let count = 0;
 let total = 0;
 
+/* Global Products */
+
+let allProducts = [];
+
+/* Add To Cart */
+
 function addToCart(price){
 
     count++;
 
-    total += price;
+    total += Number(price);
 
     document.getElementById("cartCount")
     .innerText = count;
@@ -33,71 +43,25 @@ function addToCart(price){
 
 function openCart(){
 
-    document.getElementById("cartPopup")
-    .style.display = "flex";
+    let popup =
+    document.getElementById("cartPopup");
+
+    if(popup){
+
+        popup.style.display = "flex";
+    }
 
 }
 
 function closeCart(){
 
-    document.getElementById("cartPopup")
-    .style.display = "none";
+    let popup =
+    document.getElementById("cartPopup");
 
-}
+    if(popup){
 
-/* Product Details */
-
-function openDetails(name, price){
-
-    document.getElementById("detailsPopup")
-    .style.display = "flex";
-
-    document.getElementById("productTitle")
-    .innerText = name;
-
-    document.getElementById("productPrice")
-    .innerText = price;
-
-}
-
-function closeDetails(){
-
-    document.getElementById("detailsPopup")
-    .style.display = "none";
-
-}
-
-/* Checkout */
-
-function openCheckout(){
-
-    document.getElementById("checkoutPopup")
-    .style.display = "flex";
-
-}
-
-function closeCheckout(){
-
-    document.getElementById("checkoutPopup")
-    .style.display = "none";
-
-}
-
-/* Order */
-
-function placeOrder(){
-
-    closeCheckout();
-
-    document.getElementById("successPopup")
-    .style.display = "flex";
-
-    setTimeout(() => {
-
-        document.getElementById("successPopup")
-        .style.display = "none";
-
-    }, 3000);
+        popup.style.display = "none";
+    }
 
 }
 
@@ -115,44 +79,16 @@ function toggleTheme(){
 
 function toggleMenu(){
 
-    document.getElementById("navLinks")
-    .classList.toggle("active");
+    let navLinks =
+    document.getElementById("navLinks");
+
+    navLinks.classList.toggle(
+        "active"
+    );
 
 }
 
-/* Search */
-
-const searchInput =
-document.getElementById("searchInput");
-
-searchInput.addEventListener("keyup", function(){
-
-    let filter =
-    searchInput.value.toLowerCase();
-
-    let cards =
-    document.querySelectorAll(".product-card");
-
-    cards.forEach(card => {
-
-        let text =
-        card.innerText.toLowerCase();
-
-        if(text.includes(filter)){
-
-            card.style.display = "block";
-
-        }
-
-        else{
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-});
+window.toggleMenu = toggleMenu;
 
 /* Reveal Animation */
 
@@ -163,83 +99,28 @@ function reveal(){
     let reveals =
     document.querySelectorAll(".reveal");
 
-    for(let i=0; i<reveals.length; i++){
+    for(let i = 0; i < reveals.length; i++){
 
         let windowHeight =
         window.innerHeight;
 
         let revealTop =
-        reveals[i].getBoundingClientRect().top;
+        reveals[i]
+        .getBoundingClientRect().top;
 
         let revealPoint = 100;
 
         if(revealTop < windowHeight - revealPoint){
 
-            reveals[i].classList.add("active");
+            reveals[i].classList.add(
+                "active"
+            );
 
         }
 
     }
 
 }
-
-/* Load Products From Admin */
-
-//loadProducts();
-localStorage.getItem("products")
-
-/*function loadProducts(){
-
-    let products =
-    JSON.parse(localStorage.getItem("products"))
-    || [];
-
-    let container =
-    document.getElementById("productContainer");
-
-    if(!container) return;
-
-    container.innerHTML = "";
-
-    products.forEach(product => {
-
-        container.innerHTML += `
-
-        <div class="product-card reveal">
-
-            <img src="${product.image}">
-
-            <h3>
-                ${product.name}
-            </h3>
-
-            <p class="price">
-                ₹ ${product.price}
-            </p>
-
-            <button onclick="addToCart(${product.price})">
-
-                Add To Cart
-
-            </button>
-
-            <button class="details-btn"
-            onclick="openDetails(
-            '${product.name}',
-            '₹ ${product.price}'
-            )">
-
-                View Details
-
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}*/
 
 /* Firebase */
 
@@ -263,7 +144,9 @@ loadProducts();
 async function loadProducts(){
 
     let container =
-    document.getElementById("productContainer");
+    document.getElementById(
+        "productContainer"
+    );
 
     if(!container) return;
 
@@ -274,18 +157,64 @@ async function loadProducts(){
         collection(db,"products")
     );
 
+    allProducts = [];
+
     querySnapshot.forEach(doc => {
 
         let product = doc.data();
+
+        allProducts.push(product);
+
+    });
+
+    displayProducts(allProducts);
+
+}
+
+/* Display Products */
+
+function displayProducts(products){
+
+    let container =
+    document.getElementById(
+        "productContainer"
+    );
+
+    container.innerHTML = "";
+
+    /* No Products */
+
+    if(products.length === 0){
+
+        container.innerHTML = `
+
+        <h2 class="no-products">
+
+            No Products Found
+
+        </h2>
+
+        `;
+
+        return;
+    }
+
+    /* Show Products */
+
+    products.forEach(product => {
 
         container.innerHTML += `
 
         <div class="product-card reveal">
 
-            <img src="${product.image}">
+            <img src="${product.image}"
+
+            alt="${product.name}">
 
             <h3>
+
                 ${product.name}
+
             </h3>
 
             <p class="price">
@@ -296,41 +225,76 @@ async function loadProducts(){
 
             <div class="product-buttons">
 
-    <button class="whatsapp-icon-btn"
+                <button class="whatsapp-icon-btn"
 
-    onclick="orderOnWhatsApp(
+                onclick="orderOnWhatsApp(
 
-    '${product.name}',
+                '${product.name}',
 
-    '${product.price}'
+                '${product.price}'
 
-    )">
+                )">
 
-        <i class="fab fa-whatsapp"></i>
+                    <i class="fab fa-whatsapp"></i>
 
-    </button>
+                </button>
 
-    <button class="details-btn"
+                <button class="details-btn"
 
-onclick="viewDetails(
+                onclick="viewDetails(
 
-'${product.name}',
+                '${product.name}',
 
-'${product.price}',
+                '${product.price}',
 
-'${product.image}'
+                '${product.image}'
 
-)">
+                )">
 
-    View Details
+                    View Details
 
-</button>
+                </button>
 
-</div>
+            </div>
 
         </div>
 
         `;
+
+    });
+
+}
+
+/* Product Search */
+
+let searchInput =
+document.getElementById(
+    "searchInput"
+);
+
+if(searchInput){
+
+    searchInput.addEventListener(
+        "keyup",
+
+    function(){
+
+        let searchValue =
+        this.value.toLowerCase();
+
+        let filteredProducts =
+
+        allProducts.filter(product =>
+
+            product.name
+            .toLowerCase()
+            .includes(searchValue)
+
+        );
+
+        displayProducts(
+            filteredProducts
+        );
 
     });
 
@@ -402,3 +366,49 @@ function viewDetails(
 
 window.viewDetails =
 viewDetails;
+
+/* ===================================== */
+/* AUTO PRODUCT SLIDER */
+/* ===================================== */
+
+setInterval(() => {
+
+    let container =
+
+    document.getElementById(
+        "productContainer"
+    );
+
+    if(!container) return;
+
+    container.scrollBy({
+
+        left:320,
+
+        behavior:"smooth"
+
+    });
+
+    /* Restart Slider */
+
+    if(
+
+        container.scrollLeft +
+
+        container.clientWidth >=
+
+        container.scrollWidth
+
+    ){
+
+        container.scrollTo({
+
+            left:0,
+
+            behavior:"smooth"
+
+        });
+
+    }
+
+}, 3000);
