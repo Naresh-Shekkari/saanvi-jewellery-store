@@ -225,6 +225,15 @@ function displayProducts(products){
 
             <div class="product-buttons">
 
+                <button class="wishlist-btn"
+
+onclick="toggleWishlist(this)">
+
+    <i class="fa-solid fa-heart"></i>
+
+</button>
+
+
                 <button class="whatsapp-icon-btn"
 
                 onclick="orderOnWhatsApp(
@@ -262,6 +271,10 @@ function displayProducts(products){
         `;
 
     });
+
+    /* Refresh Reveal Animation */
+
+reveal();
 
 }
 
@@ -412,3 +425,52 @@ setInterval(() => {
     }
 
 }, 3000);
+
+/* ===================================== */
+/* PRODUCT CATEGORY FILTER */
+/* ===================================== */
+
+function filterProducts(category){
+
+    /* Show All */
+
+    if(category === "all"){
+
+        displayProducts(allProducts);
+
+        return;
+    }
+
+    /* Filter Products */
+
+    let filteredProducts =
+
+    allProducts.filter(product =>
+
+        product.name
+        .toLowerCase()
+        .includes(category)
+
+    );
+
+    displayProducts(filteredProducts);
+
+}
+
+window.filterProducts =
+filterProducts;
+
+/* ===================================== */
+/* WISHLIST */
+/* ===================================== */
+
+function toggleWishlist(button){
+
+    button.classList.toggle(
+        "active"
+    );
+
+}
+
+window.toggleWishlist =
+toggleWishlist;
