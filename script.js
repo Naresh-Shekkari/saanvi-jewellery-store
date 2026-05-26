@@ -264,6 +264,20 @@ onclick="toggleWishlist(this)">
 
                 </button>
 
+                <button class="upi-btn"
+
+    onclick="payWithUPI(
+
+    '${product.name}',
+
+    '${product.price}'
+
+    )">
+
+        Pay via UPI
+
+    </button>
+
             </div>
 
         </div>
@@ -384,47 +398,7 @@ viewDetails;
 /* AUTO PRODUCT SLIDER */
 /* ===================================== */
 
-setInterval(() => {
 
-    let container =
-
-    document.getElementById(
-        "productContainer"
-    );
-
-    if(!container) return;
-
-    container.scrollBy({
-
-        left:320,
-
-        behavior:"smooth"
-
-    });
-
-    /* Restart Slider */
-
-    if(
-
-        container.scrollLeft +
-
-        container.clientWidth >=
-
-        container.scrollWidth
-
-    ){
-
-        container.scrollTo({
-
-            left:0,
-
-            behavior:"smooth"
-
-        });
-
-    }
-
-}, 3000);
 
 /* ===================================== */
 /* PRODUCT CATEGORY FILTER */
@@ -479,3 +453,39 @@ function toggleWishlist(button){
 
 window.toggleWishlist =
 toggleWishlist;
+
+/* ===================================== */
+/* FREE UPI PAYMENT */
+/* ===================================== */
+
+/* ===================================== */
+/* FREE UPI PAYMENT */
+/* ===================================== */
+
+function payWithUPI(productName, productPrice){
+
+    let upiID =
+    "nareshshekkari@ybl";
+
+    let storeName =
+    "Saanvi Handmade Jewellery Store";
+
+    let note =
+    "Payment for " + productName;
+
+    /* Proper UPI URL */
+
+    let upiURL =
+    `upi://pay?pa=${upiID}&pn=${encodeURIComponent(storeName)}&am=${productPrice}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    /* Open UPI Apps */
+
+    window.location.href =
+    upiURL;
+
+}
+
+/* Window Access */
+
+window.payWithUPI =
+payWithUPI;
