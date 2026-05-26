@@ -44,13 +44,29 @@ async function addProduct(){
     let price =
     document.getElementById("productPrice").value;
 
+    let category =
+
+document.getElementById(
+    "productCategory"
+).value.toLowerCase();
+
     let imageInput =
     document.getElementById("productImage");
 
     let file =
     imageInput.files[0];
 
-    if(name === "" || price === "" || !file){
+    if(
+
+    name === "" ||
+
+    price === "" ||
+
+    category === "" ||
+
+    !file
+
+){
 
         alert("Please fill all fields");
 
@@ -62,15 +78,17 @@ async function addProduct(){
 
     reader.onload = async function(e){
 
-        let product = {
+    let product = {
 
-            name:name,
+    name:name,
 
-            price:price,
+    price:price,
 
-            image:e.target.result
+    category:category,
 
-        };
+    image:e.target.result
+
+};
 
         await addDoc(
 
@@ -189,6 +207,10 @@ function clearForm(){
 
     document.getElementById("productImage")
     .value = "";
+
+    document.getElementById(
+    "productCategory"
+).value = "";
 
 }
 

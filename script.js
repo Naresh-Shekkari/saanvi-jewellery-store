@@ -430,6 +430,10 @@ setInterval(() => {
 /* PRODUCT CATEGORY FILTER */
 /* ===================================== */
 
+/* ===================================== */
+/* PRODUCT CATEGORY FILTER */
+/* ===================================== */
+
 function filterProducts(category){
 
     /* Show All */
@@ -447,15 +451,16 @@ function filterProducts(category){
 
     allProducts.filter(product =>
 
-        product.name
-        .toLowerCase()
-        .includes(category)
+        product.category === category
 
     );
 
     displayProducts(filteredProducts);
 
 }
+
+window.filterProducts =
+filterProducts;
 
 window.filterProducts =
 filterProducts;
