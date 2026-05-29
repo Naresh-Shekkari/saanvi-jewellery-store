@@ -2,7 +2,7 @@
 
 const adminUsername = "admin";
 
-const adminPassword = "12345";
+const adminPassword = "SaanviGouthami@0225";
 
 /* Login Function */
 
