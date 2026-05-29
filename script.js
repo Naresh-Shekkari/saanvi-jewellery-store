@@ -468,7 +468,7 @@ function payWithUPI(productName, productPrice){
     "nareshshekkari@ybl";
 
     let storeName =
-    "Saanvi Handmade Jewellery Store";
+    "Naresh Shekkari";
 
     let note =
     "Payment for " + productName;
